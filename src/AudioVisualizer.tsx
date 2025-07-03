@@ -36,7 +36,7 @@ export default function AudioVisualizer() {
   };
 
   const points = dataArray.map((value, i) => {
-    const barWidth = 800 / dataArray.length;
+    const barWidth = 800 / (dataArray.length - 1);
     const x = i * barWidth;
     const barHeight = value * 0.2;
     const y = i % 2 ? 100 - barHeight : 100 + barHeight;
@@ -47,13 +47,8 @@ export default function AudioVisualizer() {
     <div>
       <button onClick={handleStart}>Share screen</button>
       <button onClick={handleStartMic}>Start mic</button>
-      <svg width="800" height="200">
-        <polyline
-          points={points.join(" ")}
-          stroke="black"
-          strokeWidth="1"
-          fill="none"
-        />
+      <svg width="800" height="200" className="bg-black stroke-white">
+        <polyline points={points.join(" ")} strokeWidth="1" fill="none" />
       </svg>
     </div>
   );
