@@ -47,7 +47,12 @@ export default function AudioVisualizer() {
     <div>
       <button onClick={handleStart}>Share screen</button>
       <button onClick={handleStartMic}>Start mic</button>
-      <svg width="800" height="200" className="bg-black stroke-white">
+      <svg
+        width="800"
+        height="200"
+        viewBox="0 0 800 200"
+        className="bg-black stroke-white w-full"
+      >
         <polyline points={points.join(" ")} strokeWidth="1" fill="none" />
       </svg>
     </div>
