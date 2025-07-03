@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 
+import Button from "./components/button";
+
 export default function AudioVisualizer() {
   const [dataArray, setDataArray] = useState<number[]>(new Array(128).fill(0));
 
@@ -59,7 +61,7 @@ export default function AudioVisualizer() {
       <div className="flex gap-4 absolute top-2 left-2">
         {!isPlaying && (
           <>
-            <button
+            <Button
               onClick={async () => {
                 const stream = await navigator.mediaDevices.getUserMedia({
                   audio: true,
@@ -68,12 +70,10 @@ export default function AudioVisualizer() {
 
                 handleStart(stream);
               }}
-              type="button"
-              className="text-slate-600 hover:text-slate-400 transition border border-transparent hover:border-slate-500 py-2 px-4 rounded-lg"
             >
               Start mic
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={async () => {
                 const stream = await navigator.mediaDevices.getDisplayMedia({
                   video: true,
@@ -82,11 +82,9 @@ export default function AudioVisualizer() {
 
                 handleStart(stream);
               }}
-              type="button"
-              className="text-slate-600 hover:text-slate-400 transition border border-transparent hover:border-slate-500 py-2 px-4 rounded-lg"
             >
               Share screen
-            </button>
+            </Button>
           </>
         )}
         {isPlaying && (
