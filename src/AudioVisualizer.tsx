@@ -1,10 +1,9 @@
 import { useRef, useState } from "react";
-import { startAudioVisualizer } from "./startAudioVisualizer";
-
-export interface AudioVisualizerSetup {
-  analyser: AnalyserNode;
-  dataArray: Uint8Array;
-}
+import {
+  startAudioVisualizer,
+  startMicAudioVisualizer,
+  type AudioVisualizerSetup,
+} from "./startAudioVisualizer";
 
 export default function AudioVisualizer() {
   const [dataArray, setDataArray] = useState<number[]>([]);
@@ -12,6 +11,19 @@ export default function AudioVisualizer() {
 
   const handleStart = async () => {
     const setup = await startAudioVisualizer();
+    setupRef.current = setup;
+
+    const draw = () => {
+      requestAnimationFrame(draw);
+      setup.analyser.getByteFrequencyData(setup.dataArray);
+      setDataArray([...setup.dataArray]);
+    };
+
+    draw();
+  };
+
+  const handleStartMic = async () => {
+    const setup = await startMicAudioVisualizer();
     setupRef.current = setup;
 
     const draw = () => {
@@ -38,6 +50,7 @@ export default function AudioVisualizer() {
       }}
     >
       <button onClick={handleStart}>Start Visualizer</button>
+      <button onClick={handleStartMic}>Start Mic Visualizer</button>
       <svg width="800" height="200">
         <polyline
           points={points.join(" ")}
