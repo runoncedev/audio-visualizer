@@ -7,8 +7,8 @@ export default function AudioVisualizer() {
 
   const [isPlaying, setIsPlaying] = useState(false);
 
+  // Refs used for stopping
   const animationFrameIdRef = useRef<number | null>(null);
-
   const audioCtxRef = useRef<AudioContext | null>(null);
   const sourceRef = useRef<MediaStreamAudioSourceNode | null>(null);
 
