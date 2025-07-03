@@ -1,38 +1,49 @@
 import { useRef, useState } from "react";
-import {
-  startAudioVisualizer,
-  startMicAudioVisualizer,
-  type AudioVisualizerSetup,
-} from "./startAudioVisualizer";
 
 export default function AudioVisualizer() {
   const [dataArray, setDataArray] = useState<number[]>(new Array(128).fill(0));
-  const setupRef = useRef<AudioVisualizerSetup | null>(null);
 
-  const handleStart = async () => {
-    const setup = await startAudioVisualizer();
-    setupRef.current = setup;
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const animationFrameIdRef = useRef<number | null>(null);
+
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const sourceRef = useRef<MediaStreamAudioSourceNode | null>(null);
+
+  const handleStart = async (stream: MediaStream) => {
+    setIsPlaying(true);
+
+    audioCtxRef.current = new AudioContext();
+    sourceRef.current = audioCtxRef.current.createMediaStreamSource(stream);
+
+    const analyser = audioCtxRef.current.createAnalyser();
+    analyser.fftSize = 32;
+
+    sourceRef.current.connect(analyser);
+
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
 
     const draw = () => {
-      requestAnimationFrame(draw);
-      setup.analyser.getByteFrequencyData(setup.dataArray);
-      setDataArray([...setup.dataArray]);
+      animationFrameIdRef.current = requestAnimationFrame(draw);
+      analyser.getByteFrequencyData(dataArray);
+      setDataArray([...dataArray]);
     };
 
     draw();
   };
 
-  const handleStartMic = async () => {
-    const setup = await startMicAudioVisualizer();
-    setupRef.current = setup;
+  const handleStop = () => {
+    setIsPlaying(false);
 
-    const draw = () => {
-      requestAnimationFrame(draw);
-      setup.analyser.getByteFrequencyData(setup.dataArray);
-      setDataArray([...setup.dataArray]);
-    };
+    audioCtxRef.current?.close();
+    sourceRef.current?.disconnect();
 
-    draw();
+    setDataArray(new Array(128).fill(0));
+
+    if (animationFrameIdRef.current) {
+      cancelAnimationFrame(animationFrameIdRef.current);
+    }
   };
 
   const points = dataArray.map((value, i) => {
@@ -45,9 +56,48 @@ export default function AudioVisualizer() {
 
   return (
     <div className="flex flex-col items-center justify-center h-dvh bg-black">
-      <div className="flex gap-4 absolute top-0 left-0 text-white">
-        <button onClick={handleStart}>Share screen</button>
-        <button onClick={handleStartMic}>Start mic</button>
+      <div className="flex gap-4 absolute top-2 left-2">
+        {!isPlaying && (
+          <>
+            <button
+              onClick={async () => {
+                const stream = await navigator.mediaDevices.getUserMedia({
+                  audio: true,
+                  video: false,
+                });
+
+                handleStart(stream);
+              }}
+              type="button"
+              className="text-slate-600 hover:text-slate-400 transition border border-transparent hover:border-slate-500 py-2 px-4 rounded-lg"
+            >
+              Start mic
+            </button>
+            <button
+              onClick={async () => {
+                const stream = await navigator.mediaDevices.getDisplayMedia({
+                  video: true,
+                  audio: true,
+                });
+
+                handleStart(stream);
+              }}
+              type="button"
+              className="text-slate-600 hover:text-slate-400 transition border border-transparent hover:border-slate-500 py-2 px-4 rounded-lg"
+            >
+              Share screen
+            </button>
+          </>
+        )}
+        {isPlaying && (
+          <button
+            type="button"
+            className="text-slate-600 hover:text-slate-400 transition border border-transparent hover:border-slate-500 py-2 px-4 rounded-lg"
+            onClick={handleStop}
+          >
+            Stop
+          </button>
+        )}
       </div>
       <svg
         width="800"
