@@ -6,4 +6,4 @@ Supports screen share or mic and can be stopped.
 
 Basic styling done with Tailwind, can be easily stripped off.
 
-Most of the magic is in `src/AudioVisualizer.tsx`, specially in `handleStart` function.
+Most of the magic is in `src/AudioVisualizer.tsx`, specially in `handleStart` function which receives a `MediaStream` from `getUserMedia` (mic) or `getDisplayMedia` (screen share).
