@@ -87,15 +87,7 @@ export default function AudioVisualizer() {
             </Button>
           </>
         )}
-        {isPlaying && (
-          <button
-            type="button"
-            className="text-slate-600 hover:text-slate-400 transition border border-transparent hover:border-slate-500 py-2 px-4 rounded-lg"
-            onClick={handleStop}
-          >
-            Stop
-          </button>
-        )}
+        {isPlaying && <Button onClick={handleStop}>Stop</Button>}
       </div>
       <svg
         width="800"
