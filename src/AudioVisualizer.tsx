@@ -6,7 +6,7 @@ import {
 } from "./startAudioVisualizer";
 
 export default function AudioVisualizer() {
-  const [dataArray, setDataArray] = useState<number[]>([]);
+  const [dataArray, setDataArray] = useState<number[]>(new Array(128).fill(0));
   const setupRef = useRef<AudioVisualizerSetup | null>(null);
 
   const handleStart = async () => {
@@ -44,17 +44,13 @@ export default function AudioVisualizer() {
   });
 
   return (
-    <div
-      style={{
-        backgroundColor: "black",
-      }}
-    >
-      <button onClick={handleStart}>Start Visualizer</button>
-      <button onClick={handleStartMic}>Start Mic Visualizer</button>
+    <div>
+      <button onClick={handleStart}>Share screen</button>
+      <button onClick={handleStartMic}>Start mic</button>
       <svg width="800" height="200">
         <polyline
           points={points.join(" ")}
-          stroke="white"
+          stroke="black"
           strokeWidth="1"
           fill="none"
         />
