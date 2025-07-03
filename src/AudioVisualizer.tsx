@@ -44,9 +44,11 @@ export default function AudioVisualizer() {
   });
 
   return (
-    <div>
-      <button onClick={handleStart}>Share screen</button>
-      <button onClick={handleStartMic}>Start mic</button>
+    <div className="flex flex-col items-center justify-center h-dvh bg-black">
+      <div className="flex gap-4 absolute top-0 left-0 text-white">
+        <button onClick={handleStart}>Share screen</button>
+        <button onClick={handleStartMic}>Start mic</button>
+      </div>
       <svg
         width="800"
         height="200"
