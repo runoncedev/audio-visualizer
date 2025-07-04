@@ -73,6 +73,12 @@ export default function AudioVisualizer() {
 
                 streamRef.current = stream;
 
+                stream.getTracks().forEach((track) => {
+                  track.addEventListener("ended", () => {
+                    handleStop();
+                  });
+                });
+
                 handleStart(stream);
               }}
             >
@@ -86,6 +92,12 @@ export default function AudioVisualizer() {
                 });
 
                 streamRef.current = stream;
+
+                stream.getTracks().forEach((track) => {
+                  track.addEventListener("ended", () => {
+                    handleStop();
+                  });
+                });
 
                 handleStart(stream);
               }}
