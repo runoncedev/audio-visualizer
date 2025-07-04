@@ -1,6 +1,10 @@
 import { useRef, useState } from "react";
 
 import Button from "./components/button";
+import Circles from "./components/visualizers/circles";
+import Dots from "./components/visualizers/dots";
+import Polyline from "./components/visualizers/polyline";
+import Polylines from "./components/visualizers/polylines";
 
 export default function AudioVisualizer() {
   const [dataArray, setDataArray] = useState<number[]>(new Array(128).fill(0));
@@ -50,14 +54,6 @@ export default function AudioVisualizer() {
       cancelAnimationFrame(animationFrameIdRef.current);
     }
   };
-
-  const points = dataArray.map((value, i) => {
-    const barWidth = 800 / (dataArray.length - 1);
-    const x = i * barWidth;
-    const barHeight = value * 0.2;
-    const y = i % 2 ? 100 - barHeight : 100 + barHeight;
-    return `${x},${y}`;
-  });
 
   return (
     <div className="transition flex flex-col items-center justify-center h-dvh bg-white dark:bg-black">
@@ -112,14 +108,10 @@ export default function AudioVisualizer() {
         )}
         {isPlaying && <Button onClick={handleStop}>Stop</Button>}
       </div>
-      <svg
-        width="800"
-        height="200"
-        viewBox="0 0 800 200"
-        className="bg-white transition stroke-black dark:bg-black dark:stroke-white w-full"
-      >
-        <polyline points={points.join(" ")} strokeWidth="1" fill="none" />
-      </svg>
+      <Polyline dataArray={dataArray} />
+      <Dots dataArray={dataArray} />
+      <Circles dataArray={dataArray} />
+      <Polylines dataArray={dataArray} />
     </div>
   );
 }
