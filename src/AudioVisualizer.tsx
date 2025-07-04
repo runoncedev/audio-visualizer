@@ -60,7 +60,7 @@ export default function AudioVisualizer() {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center h-dvh bg-black">
+    <div className="flex flex-col items-center justify-center h-dvh bg-white dark:bg-black">
       <div className="flex gap-4 absolute top-2 left-2">
         {!isPlaying && (
           <>
@@ -116,7 +116,7 @@ export default function AudioVisualizer() {
         width="800"
         height="200"
         viewBox="0 0 800 200"
-        className="bg-black stroke-white w-full"
+        className="bg-white stroke-black dark:bg-black dark:stroke-white w-full"
       >
         <polyline points={points.join(" ")} strokeWidth="1" fill="none" />
       </svg>
