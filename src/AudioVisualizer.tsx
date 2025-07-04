@@ -11,6 +11,7 @@ export default function AudioVisualizer() {
   const animationFrameIdRef = useRef<number | null>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
   const sourceRef = useRef<MediaStreamAudioSourceNode | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
 
   const handleStart = async (stream: MediaStream) => {
     setIsPlaying(true);
@@ -37,6 +38,8 @@ export default function AudioVisualizer() {
 
   const handleStop = () => {
     setIsPlaying(false);
+
+    streamRef.current?.getTracks().forEach((track) => track.stop());
 
     audioCtxRef.current?.close();
     sourceRef.current?.disconnect();
@@ -68,6 +71,8 @@ export default function AudioVisualizer() {
                   video: false,
                 });
 
+                streamRef.current = stream;
+
                 handleStart(stream);
               }}
             >
@@ -79,6 +84,8 @@ export default function AudioVisualizer() {
                   video: true,
                   audio: true,
                 });
+
+                streamRef.current = stream;
 
                 handleStart(stream);
               }}
