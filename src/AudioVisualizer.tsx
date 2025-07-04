@@ -64,46 +64,50 @@ export default function AudioVisualizer() {
       <div className="flex gap-4 absolute top-2 left-2">
         {!isPlaying && (
           <>
-            <Button
-              onClick={async () => {
-                const stream = await navigator.mediaDevices.getUserMedia({
-                  audio: true,
-                  video: false,
-                });
-
-                streamRef.current = stream;
-
-                stream.getTracks().forEach((track) => {
-                  track.addEventListener("ended", () => {
-                    handleStop();
+            {navigator.mediaDevices?.getUserMedia && (
+              <Button
+                onClick={async () => {
+                  const stream = await navigator.mediaDevices.getUserMedia({
+                    audio: true,
+                    video: false,
                   });
-                });
 
-                handleStart(stream);
-              }}
-            >
-              Start mic
-            </Button>
-            <Button
-              onClick={async () => {
-                const stream = await navigator.mediaDevices.getDisplayMedia({
-                  video: true,
-                  audio: true,
-                });
+                  streamRef.current = stream;
 
-                streamRef.current = stream;
-
-                stream.getTracks().forEach((track) => {
-                  track.addEventListener("ended", () => {
-                    handleStop();
+                  stream.getTracks().forEach((track) => {
+                    track.addEventListener("ended", () => {
+                      handleStop();
+                    });
                   });
-                });
 
-                handleStart(stream);
-              }}
-            >
-              Share screen
-            </Button>
+                  handleStart(stream);
+                }}
+              >
+                Start mic
+              </Button>
+            )}
+            {navigator.mediaDevices?.getDisplayMedia && (
+              <Button
+                onClick={async () => {
+                  const stream = await navigator.mediaDevices.getDisplayMedia({
+                    video: true,
+                    audio: true,
+                  });
+
+                  streamRef.current = stream;
+
+                  stream.getTracks().forEach((track) => {
+                    track.addEventListener("ended", () => {
+                      handleStop();
+                    });
+                  });
+
+                  handleStart(stream);
+                }}
+              >
+                Share screen
+              </Button>
+            )}
           </>
         )}
         {isPlaying && <Button onClick={handleStop}>Stop</Button>}
