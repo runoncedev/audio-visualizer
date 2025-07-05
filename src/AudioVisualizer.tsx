@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 
 import Button from "./components/button";
 import Circles from "./components/visualizers/circles";
+import Division from "./components/visualizers/division";
 import Dots from "./components/visualizers/dots";
 import Polyline from "./components/visualizers/polyline";
 import Polylines from "./components/visualizers/polylines";
@@ -116,6 +117,7 @@ export default function AudioVisualizer() {
       <Circles dataArray={dataArray} />
       <Polylines dataArray={dataArray} />
       <StraightLines dataArray={dataArray} />
+      <Division dataArray={dataArray} />
     </div>
   );
 }
