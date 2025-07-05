@@ -6,8 +6,10 @@ import Dots from "./components/visualizers/dots";
 import Polyline from "./components/visualizers/polyline";
 import Polylines from "./components/visualizers/polylines";
 
+const defaultDataArray = new Array(16).fill(0);
+
 export default function AudioVisualizer() {
-  const [dataArray, setDataArray] = useState<number[]>(new Array(128).fill(0));
+  const [dataArray, setDataArray] = useState<number[]>(defaultDataArray);
 
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -48,7 +50,7 @@ export default function AudioVisualizer() {
     audioCtxRef.current?.close();
     sourceRef.current?.disconnect();
 
-    setDataArray(new Array(128).fill(0));
+    setDataArray(defaultDataArray);
 
     if (animationFrameIdRef.current) {
       cancelAnimationFrame(animationFrameIdRef.current);
