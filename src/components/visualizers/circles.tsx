@@ -21,7 +21,7 @@ export default function Circles({ dataArray }: CirclesProps) {
       {points.map((point, i) => {
         const value = Number(point.split(",")[1]);
         const radius = Math.max(1, Math.abs(value - 100) / 3);
-        const spacing = 800 / (points.length - 1); // Calculate spacing based on SVG width
+        const spacing = 800 / (points.length - 1);
         return <circle key={i} cx={i * spacing} cy={100} r={radius} />;
       })}
     </svg>
