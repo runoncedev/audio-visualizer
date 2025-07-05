@@ -5,6 +5,7 @@ import Circles from "./components/visualizers/circles";
 import Dots from "./components/visualizers/dots";
 import Polyline from "./components/visualizers/polyline";
 import Polylines from "./components/visualizers/polylines";
+import StraightLines from "./components/visualizers/straight-lines";
 
 const defaultDataArray = new Array(16).fill(0);
 
@@ -114,6 +115,7 @@ export default function AudioVisualizer() {
       <Dots dataArray={dataArray} />
       <Circles dataArray={dataArray} />
       <Polylines dataArray={dataArray} />
+      <StraightLines dataArray={dataArray} />
     </div>
   );
 }
