@@ -4,6 +4,7 @@ import Button from "./components/button";
 import Circles from "./components/visualizers/circles";
 import Division from "./components/visualizers/division";
 import Dots from "./components/visualizers/dots";
+import Polygon from "./components/visualizers/polygon";
 import Polyline from "./components/visualizers/polyline";
 import Polylines from "./components/visualizers/polylines";
 import StraightLines from "./components/visualizers/straight-lines";
@@ -118,6 +119,7 @@ export default function AudioVisualizer() {
       <Polylines dataArray={dataArray} />
       <StraightLines dataArray={dataArray} />
       <Division dataArray={dataArray} />
+      <Polygon dataArray={dataArray} />
     </div>
   );
 }
