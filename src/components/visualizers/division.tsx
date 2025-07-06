@@ -3,23 +3,18 @@ type DivisionProps = {
 };
 
 export default function Division({ dataArray }: DivisionProps) {
-  const numGroups = 2;
-  const svgWidth = 800;
-  const svgHeight = 200;
-  const groupHeight = svgHeight / numGroups;
-  const groupSize = Math.ceil(dataArray.length / numGroups);
+  const groupHeight = 100;
 
-  // Split dataArray into 10 groups
-  const groups = Array.from({ length: numGroups }, (_, i) =>
-    dataArray.slice(i * groupSize, (i + 1) * groupSize)
-  );
+  const groups = [
+    dataArray.slice(0, dataArray.length / 2),
+    dataArray.slice(dataArray.length / 2),
+  ];
 
   // For each group, create a polyline
   const lines = groups.map((group, groupIdx) => {
-    const baseY = groupHeight * (groupIdx + 1); // bottom of the group band
-    const xStep = svgWidth / (group.length - 1 || 1);
+    const baseY = groupHeight * (groupIdx + 1);
+    const xStep = 800 / (group.length - 1);
 
-    // Normalize group values
     const min = Math.min(...group);
     const max = Math.max(...group);
     const range = max - min || 1;
@@ -27,13 +22,15 @@ export default function Division({ dataArray }: DivisionProps) {
     const points = group
       .map((value, i) => {
         // Normalize value between 0 and 1
-        const norm = (value - min) / range;
-        // y: 0 (top of band) to groupHeight (bottom of band)
-        const y = baseY - norm * groupHeight;
+        const normalizedValue = (value - min) / range;
+
+        const y = baseY - normalizedValue * groupHeight;
         const x = i * xStep;
+
         return `${x},${y}`;
       })
       .join(" ");
+
     return (
       <polyline
         key={groupIdx}
