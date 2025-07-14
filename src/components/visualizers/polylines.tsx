@@ -32,7 +32,7 @@ export default function Polyline({ dataArray }: PolylineProps) {
       width="800"
       height="200"
       viewBox="0 0 800 200"
-      className="bg-white transition stroke-black dark:bg-black dark:stroke-white w-full"
+      className="bg-white shrink-0 transition stroke-black dark:bg-black dark:stroke-white w-full"
     >
       <polyline points={oddPoints.join(" ")} strokeWidth="1" fill="none" />
       <polyline points={evenPoints.join(" ")} strokeWidth="1" fill="none" />

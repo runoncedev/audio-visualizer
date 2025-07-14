@@ -16,7 +16,7 @@ export default function Polyline({ dataArray }: PolylineProps) {
       width="800"
       height="200"
       viewBox="0 0 800 200"
-      className="bg-white transition stroke-black dark:bg-black dark:stroke-white w-full"
+      className="bg-white transition shrink-0 stroke-black dark:bg-black dark:stroke-white w-full"
     >
       <polyline points={points.join(" ")} strokeWidth="1" fill="none" />
     </svg>

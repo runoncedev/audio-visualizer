@@ -44,8 +44,8 @@ export default function Polygon({ dataArray }: PolygonProps) {
     };
   });
 
-  // Create the filled polygon between the two polylines
   let polygon = null;
+
   if (lines.length === 2) {
     // First group points in order, second group points in reverse order
     const polygonPoints = [
@@ -66,7 +66,7 @@ export default function Polygon({ dataArray }: PolygonProps) {
       width="800"
       height="200"
       viewBox="0 0 800 200"
-      className="bg-white transition dark:fill-white stroke-black dark:bg-black dark:stroke-white w-full"
+      className="bg-white shrink-0 transition dark:fill-white stroke-black dark:bg-black dark:stroke-white w-full"
     >
       {polygon}
     </svg>

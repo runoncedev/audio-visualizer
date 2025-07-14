@@ -36,8 +36,7 @@ export default function Division({ dataArray }: DivisionProps) {
         key={groupIdx}
         points={points}
         fill="none"
-        stroke="white"
-        strokeWidth={2}
+        strokeWidth={1}
         opacity={0.8}
       />
     );
@@ -48,7 +47,7 @@ export default function Division({ dataArray }: DivisionProps) {
       width="800"
       height="200"
       viewBox="0 0 800 200"
-      className="bg-white transition stroke-black dark:bg-black dark:stroke-white w-full"
+      className="bg-white shrink-0 transition stroke-black dark:bg-black dark:stroke-white w-full"
     >
       {lines}
     </svg>

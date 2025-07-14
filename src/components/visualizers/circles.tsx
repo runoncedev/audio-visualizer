@@ -16,7 +16,7 @@ export default function Circles({ dataArray }: CirclesProps) {
       width="800"
       height="200"
       viewBox="0 0 800 200"
-      className="bg-white transition stroke-black fill-black dark:bg-black dark:stroke-white dark:fill-white w-full"
+      className="bg-white shrink-0 transition stroke-black fill-black dark:bg-black dark:stroke-white dark:fill-white w-full"
     >
       {points.map((point, i) => {
         const value = Number(point.split(",")[1]);
