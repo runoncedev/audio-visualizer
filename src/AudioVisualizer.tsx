@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 
 import { twMerge } from "tailwind-merge";
 import Button from "./components/button";
+import Circle from "./components/visualizers/circle";
 import Circles from "./components/visualizers/circles";
 import Division from "./components/visualizers/division";
 import Dots from "./components/visualizers/dots";
@@ -33,10 +34,10 @@ export default function AudioVisualizer() {
   const fileAudioCtxRef = useRef<AudioContext | null>(null);
   const fileSourceRef = useRef<AudioBufferSourceNode | null>(null);
 
-  console.log(
-    "sample rate!",
-    formatSampleRate(audioCtxRef.current?.sampleRate ?? 0),
-  );
+  // console.log(
+  //   "sample rate!",
+  //   formatSampleRate(audioCtxRef.current?.sampleRate ?? 0),
+  // );
 
   const handleStart = async (stream: MediaStream) => {
     setIsPlaying(true);
@@ -86,6 +87,7 @@ export default function AudioVisualizer() {
     <StraightLines dataArray={dataArray} />,
     <Division dataArray={dataArray} />,
     <Polygon dataArray={dataArray} />,
+    <Circle dataArray={dataArray} />,
   ];
 
   return (
