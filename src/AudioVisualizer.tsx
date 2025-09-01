@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 
 import { twMerge } from "tailwind-merge";
 import Button from "./components/button";
+import Bars from "./components/visualizers/bars";
 import Circle from "./components/visualizers/circle";
 import Circles from "./components/visualizers/circles";
 import Division from "./components/visualizers/division";
@@ -88,6 +89,7 @@ export default function AudioVisualizer() {
     <Division dataArray={dataArray} />,
     <Polygon dataArray={dataArray} />,
     <Circle dataArray={dataArray} />,
+    <Bars dataArray={dataArray} />,
   ];
 
   return (
