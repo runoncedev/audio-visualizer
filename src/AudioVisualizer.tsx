@@ -11,12 +11,12 @@ import Polyline from "./components/visualizers/polyline";
 import Polylines from "./components/visualizers/polylines";
 import StraightLines from "./components/visualizers/straight-lines";
 
-const formatSampleRate = (sampleRate: number): string => {
-  if (sampleRate >= 1000) {
-    return `${(sampleRate / 1000).toFixed(1)} kHz`;
-  }
-  return `${sampleRate} Hz`;
-};
+// const formatSampleRate = (sampleRate: number): string => {
+//   if (sampleRate >= 1000) {
+//     return `${(sampleRate / 1000).toFixed(1)} kHz`;
+//   }
+//   return `${sampleRate} Hz`;
+// };
 
 const defaultDataArray = new Array(16).fill(0);
 
