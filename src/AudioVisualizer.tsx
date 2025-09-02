@@ -228,11 +228,13 @@ export default function AudioVisualizer() {
         )}
         {isPlaying && <Button onClick={handleStop}>Stop</Button>}
       </div>
-      {visualizers.map((visualizer, index) => (
-        <div key={index} className="max-w-[600px]">
-          {visualizer}
-        </div>
-      ))}
+      <div className="flex min-w-0 flex-shrink flex-wrap justify-center">
+        {visualizers.map((visualizer, index) => (
+          <div key={index} className="max-w-[600px]">
+            {visualizer}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
