@@ -3,7 +3,7 @@ type CircleProps = {
 };
 
 export default function Circle({ dataArray }: CircleProps) {
-  const [valueA, valueB, valueC, valueD] = dataArray;
+  const [valueA, valueD] = dataArray;
 
   return (
     <svg
