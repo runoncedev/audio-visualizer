@@ -3,13 +3,14 @@ import { useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import Button from "./components/button";
 import Bars from "./components/visualizers/bars";
-import Circle from "./components/visualizers/circle";
 import Circles from "./components/visualizers/circles";
 import Division from "./components/visualizers/division";
 import Dots from "./components/visualizers/dots";
+import Pattern from "./components/visualizers/pattern";
 import Polygon from "./components/visualizers/polygon";
 import Polyline from "./components/visualizers/polyline";
 import Polylines from "./components/visualizers/polylines";
+import RGB from "./components/visualizers/rgb";
 import StraightLines from "./components/visualizers/straight-lines";
 
 // const formatSampleRate = (sampleRate: number): string => {
@@ -88,8 +89,9 @@ export default function AudioVisualizer() {
     <StraightLines dataArray={dataArray} />,
     <Division dataArray={dataArray} />,
     <Polygon dataArray={dataArray} />,
-    <Circle dataArray={dataArray} />,
+    <Pattern dataArray={dataArray} />,
     <Bars dataArray={dataArray} />,
+    <RGB dataArray={dataArray} />,
   ];
 
   return (

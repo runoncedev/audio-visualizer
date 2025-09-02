@@ -1,14 +1,14 @@
-type CircleProps = {
+type PatternProps = {
   dataArray: number[];
 };
 
-export default function Circle({ dataArray }: CircleProps) {
+export default function Pattern({ dataArray }: PatternProps) {
   const normalizeValue = (value: number): number => {
     return Math.min(Math.max((value / 255) * 19 + 1, 1), 20);
   };
 
-  const [valueA] = dataArray;
-  const normalizedValueA = normalizeValue(valueA);
+  const [, , , , , value] = dataArray;
+  const normalizedValueA = normalizeValue(value);
 
   return (
     <svg
